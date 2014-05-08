@@ -23,6 +23,7 @@ class OpenERPAutoRun:
         [openerp_auto_run]
         recipe = openerp_auto_run:auto-run
         start_on_boot = yes
+
     and add it to you part
 
     The recipe will generate an autorun.sh script in /bin/.
