@@ -1,18 +1,18 @@
 case $$1 in
     start)
          ($supervisor_daemon_path) || echo "Deamon probably allready started"
-         $supervisor_command_path  start all
+         $supervisor_command_path start all
          ;;
 
     stop)
-         $supervisor_command_path  stop all
+         $supervisor_command_path stop all
          ;;
     restart)
          ($supervisor_daemon_path) || echo "Deamon probably allready started"
-         $supervisor_command_path  restart all
+         $supervisor_command_path restart all
          ;;
     status)
-         $supervisor_command_path status all
+         $supervisor_command_path status
          ;;
     *)
          echo "Usage: $$0 {start|stop|restart|status} [version ..]"
