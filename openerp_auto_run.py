@@ -77,7 +77,7 @@ class OpenERPAutoRun:
         )
 
     def getboolean(self, val):
-        """Parse boolean set in buidlout file
+        """Parse boolean set in buildout file
 
         :param val: string read from config file
 
@@ -119,7 +119,7 @@ class OpenERPAutoRun:
 
     def generate_auto_run_script(self):
         """Generate autorun.sh file from template file.
-        Update it content and ensure permisson
+        Update it content and ensure permission
 
         """
         with open(self.template_path) as tpl:
