@@ -64,10 +64,7 @@ class OpenERPAutoRun:
             BINPATH,
             SUPERVISORDAEMON,
         )
-        supervisor = buildout['supervisor']
-        self.supervisor_pid = supervisor['pidfile']
-        self.supervisor_logdir = supervisor['logfile']
-        self.supervisor_conf = supervisor['supervisord-conf']
+        self.supervisor_pid = buildout['supervisor']['pidfile']
         self.current_instance = buildout['erp_global']['current_instance']
 
         self.name, self.options = name, options
@@ -127,8 +124,6 @@ class OpenERPAutoRun:
         script = script_tpl.substitute(
             supervisor_daemon_path=self.supervisor_daemon_path,
             supervisor_pid=self.supervisor_pid,
-            supervisor_logdir=self.supervisor_logdir,
-            supervisor_conf=self.supervisor_conf,
             current_instance=self.current_instance
         )
         with open(self.auto_run_script_path, 'w') as script_file:
