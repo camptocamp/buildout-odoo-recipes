@@ -64,7 +64,7 @@ class OpenERPAutoRun:
             BINPATH,
             SUPERVISORDAEMON,
         )
-        supervisor = buildout['buildout']['supervisor']
+        supervisor = buildout['supervisor']
         self.supervisor_pid = supervisor['pidfile']
         self.supervisor_logdir = supervisor['logfile']
         self.supervisor_conf = supervisor['supervisord-conf']
