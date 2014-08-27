@@ -6,9 +6,8 @@ from string import Template
 import zc.buildout
 AUTORUNDIR = 'auto-run'
 AUTORUNSCRIPT = 'autorun.sh'
-TEMPlATENAME = 'autorun.sh.in'
-SUPERIVSORDAEMON = 'supervisord'
-SUPERVISOCOMMAND = 'supervisorctl'
+TEMPLATENAME = 'autorun.sh.in'
+SUPERVISORDAEMON = 'supervisord'
 BINPATH = 'bin'
 
 
@@ -58,18 +57,18 @@ class OpenERPAutoRun:
         )
         self.template_path = os.path.join(
             os.path.dirname(os.path.realpath(__file__)),
-            TEMPlATENAME
+            TEMPLATENAME
         )
         self.supervisor_daemon_path = os.path.join(
             buildout['buildout']['directory'],
             BINPATH,
-            SUPERIVSORDAEMON,
+            SUPERVISORDAEMON,
         )
-        self.supervisor_command_path = os.path.join(
-            buildout['buildout']['directory'],
-            BINPATH,
-            SUPERVISOCOMMAND,
-        )
+        supervisor = buildout['buildout']['supervisor']
+        self.supervisor_pid = supervisor['pidfile']
+        self.supervisor_logdir = supervisor['logfile']
+        self.supervisor_conf = supervisor['supervisord-conf']
+        self.current_instance = buildout['erp_global']['current_instance']
 
         self.name, self.options = name, options
         self.log = logging.getLogger(self.name)
@@ -127,7 +126,10 @@ class OpenERPAutoRun:
             script_tpl = Template(tpl.read())
         script = script_tpl.substitute(
             supervisor_daemon_path=self.supervisor_daemon_path,
-            supervisor_command_path=self.supervisor_command_path
+            supervisor_pid=self.supervisor_pid,
+            supervisor_logdir=self.supervisor_logdir,
+            supervisor_conf=self.supervisor_conf,
+            current_instance=self.current_instance
         )
         with open(self.auto_run_script_path, 'w') as script_file:
             script_file.seek(0)
