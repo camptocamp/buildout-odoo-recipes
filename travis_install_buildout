@@ -20,9 +20,9 @@ ${TRAVIS_BUILD_DIR}/bin/buildout
 export db_name=$(grep db_name ${TRAVIS_BUILD_DIR}/etc/openerp.cfg | cut -d ' ' -f 3)
 export db_user=$(grep db_user ${TRAVIS_BUILD_DIR}/etc/openerp.cfg | cut -d ' ' -f 3)
 export db_pass=$(grep db_password ${TRAVIS_BUILD_DIR}/etc/openerp.cfg | cut -d ' ' -f 3)
-psql -c "CREATE USER ${db_user} WITH PASSWORD '${db_pass}' CREATEDB;" -U postgres
+psql -c "CREATE USER ${db_user} WITH PASSWORD '${db_pass}' CREATEDB;" -d template1
 
-psql -c '\du'
+psql -c '\du' -d template1 -P pager=off
 
 # Expected directory structure:
 #
