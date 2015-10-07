@@ -22,6 +22,8 @@ export db_user=$(grep db_user ${TRAVIS_BUILD_DIR}/etc/openerp.cfg | cut -d ' ' -
 export db_pass=$(grep db_password ${TRAVIS_BUILD_DIR}/etc/openerp.cfg | cut -d ' ' -f 3)
 psql -c "CREATE USER ${db_user} WITH PASSWORD '${db_pass}' CREATEDB;" -U postgres
 
+psql -c '\du'
+
 # Expected directory structure:
 #
 #    HOME/
